@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../output.css">
+    <script src="https://kit.fontawesome.com/c588e117e7.js" crossorigin="anonymous"></script>
+    <title>CAREPLUS+ || Your no1 healthcare agent</title>
+</head>
+
+<body class="w-[100vw] overflow-x-hidden">
+    <div
+        class="w-[100vw] h-[100vh] overflow-hidden py-16 bg-gray-900 text-white flex flex-col justify-between items-center ">
+        <div>
+            <img src='../../images/logo.svg'>
+        </div>
+        <div class="flex flex-col justify-center items-center gap-4">
+            <i
+                class="bg-green-500 text-white w-[2em] lg:w-[3em] h-[2em] lg:h-[3em] rounded-full text-5xl flex justify-center items-center">&check;</i>
+            <h1 class="text-2xl lg:text-6xl w-[90vw] lg:w-[50vw] text-center ">Your <span
+                    class="text-green-500">appointment request</span> has
+                been
+                successfully
+                submitted</h1>
+            <h4 class="text-xl lg:text-2xl py-4 ">We&apos;ll be in touch shortly to confirm.</h4>
+            <div
+                class="w-[90vw] lg:w-[70vw] flex flex-col lg:flex-row gap-4 justify-center items-center border-t-2 border-b-2 text-xs lg:text-2xl py-8 text-thin">
+                <h2>Requested Appointment Details</h2>
+                <h5 id="doctorDetails" class="bg-gray-300 rounded-2xl p-4 text-black flex gap-2 items-center">
+                    <img src="" class="border border-black rounded-full h-8 w-8 flex" alt="">Doctor Name
+                </h5>
+                <p id="datetime"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Retrieve data from localStorage
+        const doctor = localStorage.getItem('doctor');
+        const reason = localStorage.getItem('reason');
+        const date = localStorage.getItem('date');
+
+        // Set the doctor name and reason
+        document.getElementById('doctorDetails').innerHTML = `
+            <img src="../../images/doctor.png" class="border border-black rounded-full h-8 w-8 flex" alt="">${doctor} - ${reason}
+        `;
+
+        // Display the date and time
+        const now = new Date();
+        const datetime = `${date} at ${now.toLocaleTimeString()}`;
+        document.getElementById("datetime").innerHTML = datetime;
+
+        // Optional: Clear localStorage after use
+        localStorage.clear();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../output.css">
+  <script src="https://kit.fontawesome.com/c588e117e7.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <title>CAREPLUS+ || Your no1 healthcare agent</title>
+</head>
+
+<body class="w-[100vw] overflow-x-hidden">
+  <div class="w-[100vw] overflow-x-hidden bg-gray-900 text-white flex flex-col lg:flex-row">
+    <div class='flex flex-col justify-center items-center w-[100vw] lg:w-[70vw] py-8'>
+      <div class="mt-8">
+        <img src="../../images/Logo.svg" alt="Careplus Logo">
+      </div>
+      <form class="flex flex-col justify-center items-center">
+        <div class="w-[60vw] py-16">
+          <h1 class="text-2xl lg:text-3xl font-bold">Personal Information</h1>
+        </div>
+        <div class="text-white gap-2 flex flex-col py-2">
+          <label for="fullname">Full Name</label>
+          <input type="text" id="fullname" placeholder="Full Name"
+            class="w-[80vw] lg:w-[60vw] bg-gray-800 border h-[3em] rounded-xl pl-8" />
+        </div>
+        <div class="flex gap-2 flex-col lg:flex-row">
+          <div class="text-white gap-2 py-2 flex flex-col">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" placeholder="Phone Number"
+              class="w-[80vw] lg:w-[30vw] h-[3em] rounded-xl pl-8 bg-gray-800 border" />
+          </div>
+          <div class="text-white gap-2 py-2 flex flex-col">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Email Address"
+              class="w-[80vw] lg:w-[30vw] h-[3em] rounded-xl pl-8 bg-gray-800 border" />
+          </div>
+        </div>
+        <div class="flex gap-2 flex-col lg:flex-row">
+          <div class="text-white gap-2 py-2 flex flex-col">
+            <label for="dob">Date of Birth</label>
+            <input type="date" id="dob" class="w-[80vw] lg:w-[30vw] h-[3em] rounded-xl px-4 bg-gray-800 border" />
+          </div>
+          <div class="text-white gap-2 py-2 flex flex-col">
+            <label>Sex</label>
+            <div class="flex gap-4">
+              <label
+                class="h-[3em] flex gap-2 justify-center items-center w-[25vw] lg:w-[9vw] rounded-xl bg-gray-800 border border-dashed">
+                <input type="radio" name="sex" value="male"> Male
+              </label>
+              <label
+                class="h-[3em] flex gap-2 justify-center items-center w-[25vw] lg:w-[9vw] rounded-xl bg-gray-800 border border-dashed">
+                <input type="radio" name="sex" value="female"> Female
+              </label>
+              <label
+                class="h-[3em] flex gap-2 justify-center items-center w-[25vw] lg:w-[9vw] rounded-xl bg-gray-800 border border-dashed">
+                <input type="radio" name="sex" value="other"> Other
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="flex gap-2 flex-col lg:flex-row">
+          <div class="text-white gap-2 py-2 flex flex-col">
+            <label for="address">Address</label>
+            <input type="text" id="address" placeholder="Address"
+              class="w-[80vw] lg:w-[30vw] h-[3em] rounded-xl pl-8 bg-gray-800 border" />
+          </div>
+          <div class="text-white gap-2 py-2 flex flex-col">
+            <label for="occupation">Occupation</label>
+            <input type="text" id="occupation" placeholder="Occupation"
+              class="w-[80vw] lg:w-[30vw] h-[3em] rounded-xl pl-8 bg-gray-800 border" />
+          </div>
+        </div>
+        <div class="flex gap-2 flex-col lg:flex-row">
+          <div class="text-white gap-2 py-2 flex flex-col">
+            <label for="emergencyContact">Emergency Contact Name</label>
+            <input type="text" id="emergencyContact" placeholder="Emergency Contact Name"
+              class="w-[80vw] lg:w-[30vw] h-[3em] rounded-xl pl-8 bg-gray-800 border" />
+          </div>
+          <div class="text-white gap-2 py-2 flex flex-col">
+            <label for="emergencyPhone">Emergency Phone Number</label>
+            <input type="tel" id="emergencyPhone" placeholder="Emergency Phone Number"
+              class="w-[80vw] lg:w-[30vw] h-[3em] rounded-xl pl-8 bg-gray-800 border" />
+          </div>
+        </div>
+        <div class="w-[60vw] py-16">
+          <h1 class="text-3xl font-bold">Medical Information</h1>
+        </div>
+        <div class="text-white gap-2 flex flex-col py-2">
+          <label for="doctor">Primary care pyhsician</label>
+          <select id="doctor" class="w-[80vw] lg:w-[60vw] bg-gray-800 border h-[3em] rounded-xl px-8">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+          </select>
+        </div>
+        <div class="flex gap-2 flex-col lg:flex-row">
+          <div class="text-white gap-2 py-2 flex flex-col">
+            <label for="doctorPhone">Insurance provider</label>
+            <input type="tel" id="doctorPhone" placeholder="Doctor's Phone Number"
+              class="w-[80vw] lg:w-[30vw] h-[3em] rounded-xl pl-8 bg-gray-800 border" />
+          </div>
+          <div class="text-white gap-2 py-2 flex flex-col">
+            <label for="doctorEmail">Insurance policy number</label>
+            <input type="email" id="doctorEmail" placeholder="Doctor's Email Address"
+              class="w-[80vw] lg:w-[30vw] h-[3em] rounded-xl pl-8 bg-gray-800 border" />
+          </div>
+        </div>
+        <div class="flex gap-2 flex-col lg:flex-row">
+          <div class="text-white gap-2 py-2 flex flex-col">
+            <label for="doctorPhone">Allergies (if any)</label>
+            <input type="tel" id="doctorPhone" placeholder="Doctor's Phone Number"
+              class="w-[80vw] lg:w-[30vw] h-[8em] rounded-xl pl-8 bg-gray-800 border" />
+          </div>
+          <div class="text-white gap-2 py-2 flex flex-col">
+            <label for="doctorEmail">Current medications</label>
+            <input type="email" id="doctorEmail" placeholder="Doctor's Email Address"
+              class="w-[80vw] lg:w-[30vw] h-[8em] rounded-xl pl-8 bg-gray-800 border" />
+          </div>
+        </div>
+        <div class="flex gap-2 flex-col lg:flex-row">
+          <div class="text-white gap-2 py-2 flex flex-col">
+            <label for="doctorPhone">Family medical history (if relevant)</label>
+            <input type="tel" id="doctorPhone" placeholder="Doctor's Phone Number"
+              class="w-[80vw] lg:w-[30vw] h-[8em] rounded-xl pl-8 bg-gray-800 border" />
+          </div>
+          <div class="text-white gap-2 py-2 flex flex-col">
+            <label for="doctorEmail">Past medical history</label>
+            <input type="email" id="doctorEmail" placeholder="Doctor's Email Address"
+              class="w-[80vw] lg:w-[30vw] h-[8em] rounded-xl pl-8 bg-gray-800 border" />
+          </div>
+        </div>
+        <div class="w-[60vw] py-16">
+          <h1 class="text-2xl lg:text-3xl font-bold">identification and verification</h1>
+        </div>
+        <div class="text-white gap-2 flex flex-col py-2">
+          <label for="additionalInfo">idetifiction type</label>
+          <select id="doctor" class="w-[80vw] lg:w-[60vw] bg-gray-800 border h-[3em] rounded-xl px-8">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+          </select>
+        </div>
+        <div class="text-white gap-2 flex flex-col py-2">
+          <label for="additionalInfo">identifation number</label>
+          <input id="additionalInfo" placeholder="Enter any additional information"
+            class="w-[80vw] lg:w-[60vw] h-[3em] rounded-xl pl-8 bg-gray-800 border">
+        </div>
+        <div class="text-white gap-2 flex flex-col py-2">
+          <label for="profileUpload">Please upload a valid image file.</label>
+          <div class="relative w-[80vw] lg:w-[60vw]">
+            <input type="file" id="profileUpload" accept=".jpg,.jpeg,.png"
+              class="w-full bg-gray-800 border h-[8em] flex justify-center items-center rounded-xl text-center text-sm text-gray-400 file:hidden" />
+            <i class="fas fa-upload absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+            <span class="absolute top-1/2 transform -translate-y-1/2 translate-x-[20vw] left-16 text-gray-400">Upload
+              your profile</span>
+          </div>
+          <p id="uploadError" class="text-red-500 hidden">Please upload a valid image file (JPG, PNG).</p>
+        </div>
+        <div class="w-[60vw] py-16">
+          <h1 class="text-3xl font-bold">Terms and Conditions</h1>
+        </div>
+        <div class="w-[80vw] lg:w-[60vw] py-4 flex gap-4 break-all">
+          <input type="checkbox" id="terms1">
+          <label for="terms1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</label>
+        </div>
+        <div class="w-[80vw] lg:w-[60vw] py-4 flex gap-4 break-all">
+          <input type="checkbox" id="terms2">
+          <label for="terms2">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</label>
+        </div>
+        <div class="w-[80vw] lg:w-[60vw] py-4 flex gap-4 break-all">
+          <input type="checkbox" id="terms3">
+          <label for="terms3">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo consequat.</label>
+        </div>
+        <div class="flex flex-col justify-center items-center gap-4">
+          <button type="submit"
+            class="w-[80vw] lg:w-[60vw] py-3 bg-green-600 rounded-lg font-bold text-lg hover:bg-green-800 transition-all duration-300">
+            Submit
+          </button>
+          <h3 class="flex items-center gap-4 py-4"> If you have an account<a href='../../index.html'
+              class="text-blue-500 py-2 px-4 rounded-2xl bg-white">Login</a></h3>
+        </div>
+      </form>
+      <div class="pt-8">
+        <p class="text-gray-400">&copy;carepulse copyright</p>
+      </div>
+    </div>
+    <div class="w-[100vw] lg:w-[30vw]">
+      <img src="../../../images/appointment.png" class="w-[30vw] hidden lg:flex" alt="Careplus Logo White">
+    </div>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.querySelector("form");
+      const profileUpload = document.getElementById("profileUpload");
+      const uploadError = document.getElementById("uploadError");
+
+      // Validate file upload
+      profileUpload.addEventListener("change", (event) => {
+        const file = event.target.files[0];
+        const validExtensions = ["image/jpeg", "image/png", "image/jpg"];
+
+        if (!validExtensions.includes(file.type)) {
+          uploadError.classList.remove("hidden");
+          profileUpload.value = ""; // Clear the file input
+        } else {
+          uploadError.classList.add("hidden");
+        }
+      });
+
+      // Handle form submission
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        // Perform form validation here if needed
+        const requiredFields = ["fullname", "phone", "email", "dob", "address", "occupation", "doctor"];
+        let allFieldsFilled = true;
+
+        requiredFields.forEach((fieldId) => {
+          const field = document.getElementById(fieldId);
+          if (!field.value.trim()) {
+            field.classList.add("border-red-500");
+            allFieldsFilled = false;
+          } else {
+            field.classList.remove("border-red-500");
+          }
+        });
+
+        if (!allFieldsFilled) {
+          alert("Please fill in all required fields.");
+          return;
+        }
+
+        // Check if file upload is valid
+        if (profileUpload.value === "") {
+          uploadError.classList.remove("hidden");
+          return;
+        }
+
+        // Prepare form data
+        const formData = new FormData(form);
+
+        try {
+          // Send form data to server using Axios
+          const response = await axios.post('/api/submit-form', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          });
+
+          // Simulate OTP validation process
+          showOtpModal(response.data.otpToken);
+
+        } catch (error) {
+          console.error("Error submitting form:", error);
+          alert("Failed to submit the form. Please try again.");
+        }
+      });
+
+      function showOtpModal(otpToken) {
+        // Implement OTP modal display logic here
+        const otp = prompt("Please enter the OTP sent to your phone:");
+
+        if (otp) {
+          validateOtp(otp, otpToken);
+        } else {
+          alert("OTP validation failed.");
+        }
+      }
+
+      async function validateOtp(otp, otpToken) {
+        try {
+          const response = await axios.post('/api/validate-otp', { otp, otpToken });
+
+          if (response.data.success) {
+            alert("Form submitted successfully!");
+            window.location.href = "/next-page"; // Navigate to the next page after OTP validation
+          } else {
+            alert("Invalid OTP. Please try again.");
+          }
+
+        } catch (error) {
+          console.error("Error validating OTP:", error);
+          alert("Failed to validate OTP. Please try again.");
+        }
+      }
+    });
+
+  </script>
+</body>
+
+</html>
