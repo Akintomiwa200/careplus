@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./src/output.css">
     <script src="https://kit.fontawesome.com/c588e117e7.js" crossorigin="anonymous"></script>
-    <script src="index.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
+    <script src="./src/script/index.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>CAREPLUS+ || Your no1 healthcare agent</title>
 </head>
 
@@ -48,15 +48,15 @@
                         type='button'> Get
                         Started</button>
                 </form>
-                <h3 class="flex items-center gap-4"> If you are new to the App <a href='./src/html/registration.html'
-                        class="text-blue-500 py-2 px-4 rounded-2xl bg-white">Register</a></h3>
+                <h3 class="flex items-center gap-4"> If you are new to the App <a href='./src/registration.html'
+                        class="text-blue-500 py-2 px-4 rounded-2xl bg-white ">Register</a></h3>
             </div>
             <div>
                 <p class="text-gray-400">&copy;carepulse copyright</p>
             </div>
         </div>
         <div class="hidden lg:flex w-[50vw] h-[100vh] flex-col justify-center items-center">
-            <img src="../images/Illustration.png" alt="">
+            <img class="w-[50vw]" src="../images/Illustration.png" alt="">
         </div>
     </div>
 
@@ -84,197 +84,14 @@
                 <input type="text" maxlength="1"
                     class="otp-input border bg-gray-700 border-white w-[2em] lg:w-[3em] h-[2em] lg:h-[3em] text-center rounded-xl text-green-500 lg:text-2xl">
             </div>
-            <a href="./src/html/application.html"></a><button class="h-[3em] w-full bg-green-400 rounded-xl mb-2"
+            <a href="./src/application.html"></a><button class="h-[3em] w-full bg-green-400 rounded-xl mb-2"
                 id="verifyOtpButton">Verify OTP</button>
             <!-- <button class="h-[3em] w-full bg-red-400 rounded-xl" id="cancelOtpButton">Cancel</button> -->
         </div>
     </div>
 
-    <script>
-        // Validate form fields
-        function validateForm() {
-            const fullName = document.getElementById('fullName').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const phone = document.getElementById('phone').value.trim();
 
-            if (fullName === '' || email === '' || phone === '') {
-                alert('Please fill in all the fields.');
-                return false;
-            }
 
-            // Email format validation
-            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-            if (!emailPattern.test(email)) {
-                alert('Please enter a valid email address.');
-                return false;
-            }
-
-            // Phone number format validation (basic)
-            const phonePattern = /^[0-9]{10,15}$/;
-            if (!phonePattern.test(phone)) {
-                alert('Please enter a valid phone number.');
-                return false;
-            }
-
-            return true;
-        }
-
-        // Show Admin PIN modal if the form is valid
-        document.getElementById('getStartedButton').addEventListener('click', function (e) {
-            e.preventDefault();
-            if (validateForm()) {
-                document.getElementById('otpModal').classList.remove('hidden');
-            }
-        });
-
-        // Move to next input on typing
-        const pinInputs = document.querySelectorAll('otpInputs');
-        pinInputs.forEach((input, index) => {
-            input.addEventListener('input', function () {
-                if (input.value.length === 1) {
-                    if (index < pinInputs.length - 1) {
-                        pinInputs[index + 1].focus();
-                    } else {
-                        input.blur();
-                    }
-                }
-            });
-
-            input.addEventListener('keydown', function (e) {
-                if (e.key === 'Backspace' && input.value === '') {
-                    if (index > 0) {
-                        pinInputs[index - 1].focus();
-                    }
-                }
-            });
-        });
-
-        // Cancel Admin PIN modal
-        document.getElementById('cancelCancelModalButton').addEventListener('click', function () {
-            document.getElementById('otpModal').classList.add('hidden');
-        });
-
-        // Verify Admin PIN
-        document.getElementById('verifyPinButton').addEventListener('click', function () {
-            const pinValue = Array.from(pinInputs).map(input => input.value).join('');
-            if (pinValue.length === 6 && /^[0-9]{6}$/.test(pinValue)) {
-                alert('PIN verified! Proceeding...');
-                window.location.href = "./dashboard.html"; // Navigate to dashboard
-            } else {
-                alert('Please enter a valid 6-digit PIN.');
-            }
-        });
-    </script>
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-// Import Axios (make sure axios is included in your project)
-import axios from 'axios';
-
-// Validate form fields
-function validateForm() {
-const fullName = document.getElementById('fullName').value.trim();
-const email = document.getElementById('email').value.trim();
-const phone = document.getElementById('phone').value.trim();
-
-if (fullName === '' || email === '' || phone === '') {
-alert('Please fill in all the fields.');
-return false;
-}
-
-// Email format validation
-const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-if (!emailPattern.test(email)) {
-alert('Please enter a valid email address.');
-return false;
-}
-
-// Phone number format validation (basic)
-const phonePattern = /^[0-9]{10,15}$/;
-if (!phonePattern.test(phone)) {
-alert('Please enter a valid phone number.');
-return false;
-}
-
-return true;
-}
-
-// Show OTP modal if the form is valid
-document.getElementById('getStartedButton').addEventListener('click', async function (e) {
-e.preventDefault();
-if (validateForm()) {
-try {
-// Simulate sending form data to the server
-const response = await axios.post('/api/send-otp', {
-fullName: document.getElementById('fullName').value.trim(),
-email: document.getElementById('email').value.trim(),
-phone: document.getElementById('phone').value.trim()
-});
-
-if (response.data.success) {
-document.getElementById('otpModal').classList.remove('hidden');
-} else {
-alert('Failed to send OTP. Please try again.');
-}
-} catch (error) {
-console.error('Error sending OTP:', error);
-alert('An error occurred. Please try again.');
-}
-}
-});
-
-// Move to next input on typing
-const otpInputs = document.querySelectorAll('.otp-input');
-otpInputs.forEach((input, index) => {
-input.addEventListener('input', function () {
-if (input.value.length === 1) {
-if (index < otpInputs.length - 1) { otpInputs[index + 1].focus(); } else { input.blur(); } } });
-    input.addEventListener('keydown', function (e) { if (e.key==='Backspace' && input.value==='' ) { if (index> 0) {
-    otpInputs[index - 1].focus();
-    }
-    }
-    });
-    });
-
-    // Cancel OTP modal
-    document.getElementById('cancelOtpButton').addEventListener('click', function () {
-    document.getElementById('otpModal').classList.add('hidden');
-    });
-
-    // Verify OTP
-    document.getElementById('verifyOtpButton').addEventListener('click', async function () {
-    const otpValue = Array.from(otpInputs).map(input => input.value).join('');
-    if (otpValue.length === 6 && /^[0-9]{6}$/.test(otpValue)) {
-    try {
-    // Verify OTP
-    const response = await axios.post('/api/verify-otp', {
-    otp: otpValue,
-    email: document.getElementById('email').value.trim()
-    });
-
-    if (response.data.success) {
-    alert('OTP verified! Proceeding...');
-    window.location.href = "/../../html/registration.html";
-    document.getElementById('otpModal').classList.add('hidden');
-    } else {
-    alert('Invalid OTP. Please try again.');
-    }
-    } catch (error) {
-    console.error('Error verifying OTP:', error);
-    alert('An error occurred. Please try again.');
-    }
-    } else {
-    alert('Please enter a valid 6-digit OTP.');
-    }
-    });

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../output.css">
+    <script src="https://kit.fontawesome.com/c588e117e7.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Admin Dashboard</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #000;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #333;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #555;
+        }
+    </style>
+</head>
+
+<body class="w-[100vw] overflow-x-hidden lg:overflow-hidden">
+    <div class="w-[100vw] overflow-x-hidden bg-gray-900 text-white flex flex-col items-center">
+        <header
+            class="w-[96vw] h-[8vh] my-4 bg-black text-white px-4 lg:px-16 flex justify-between rounded-full items-center relative">
+            <div>
+                <img class="w-16 lg:w-auto" src='../../../images/logo.svg' alt="Logo">
+            </div>
+            <span class="flex items-center gap-2 lg:gap-4 relative">
+                <img src="" class="h-[2em] w-[2em] border rounded-full border-white" alt="Admin">
+                <h5 class="text-xs lg:text-auto cursor-pointer" id="adminButton">Admin</h5>
+                <!-- Dropdown Menu -->
+                <div id="dropdownMenu"
+                    class="absolute top-12 right-0 mt-2 w-48 bg-gray-800 text-white rounded-lg shadow-lg hidden">
+                    <a href="./profile.html" class="block px-4 py-2 hover:bg-gray-700">My Profile</a>
+                    <a href="./settings.html" class="block px-4 py-2 hover:bg-gray-700">Settings</a>
+                    <a href="#" id="logoutLink" class="block px-4 py-2 hover:bg-gray-700">Logout</a>
+                </div>
+            </span>
+        </header>
+
+        <div class="min-h-[90vh] w-[100vw] flex flex-col items-center">
+            <div class="h-auto mb-8 lg:h-[37vh] flex flex-col w-[80vw]">
+                <h1 class="text-3xl mt-4">Welcome, Admin 👌 </h1>
+                <p class='mb-8'>loremdfghbjkbjhgfdsZDfxdvhbjdfgh</p>
+                <div class="flex flex-col lg:flex-row lg:justify-between gap-4">
+                    <div
+                        class="h-[20vh] w-[80vw] lg:w-[25vw] border border-gray-200 rounded-2xl flex justify-center items-center flex-col bg-gradient-to-tl from-gray-950 to-blue-900">
+                        <span class="w-[15vw] text-3xl flex ">
+                            <i>&#xf086;</i>
+                            <h1 id="scheduledCount">20</h1>
+                        </span>
+                        <p>Total number of scheduled appointments</p>
+                    </div>
+                    <div
+                        class="h-[20vh] w-[80vw] lg:w-[25vw] border border-gray-200 rounded-2xl flex justify-center items-center flex-col bg-gradient-to-tl from-gray-950 to-red-900">
+                        <span class="w-[15vw] text-3xl flex">
+                            <i>&#xf3b4;</i>
+                            <h1 id="pendingCount">20</h1>
+                        </span>
+                        <p>Total number of pending appointments</p>
+                    </div>
+                    <div
+                        class="h-[20vh] w-[80vw] lg:w-[25vw] rounded-2xl border border-gray-200 flex justify-center items-center flex-col bg-gradient-to-bl from-purple-500 to-gray-950">
+                        <span class="w-[15vw] text-3xl flex">
+                            <i>&#xf3b4;</i>
+                            <h1 id="cancelledCount">20</h1>
+                        </span>
+                        <p>Total number of cancelled appointments</p>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="w-[90vw] lg:w-[80vw] h-auto lg:h-[45vh]">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Patient</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Doctor</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Table rows will be populated here -->
+                    </tbody>
+                </table>
+                <div class="flex justify-between w-[90vw] lg:w-[80vw] px-2 py-4">
+                    <button id="prevPage" class="text-green-500 text-2xl">&larr;</button>
+                    <button id="nextPage" class="text-green-500 text-2xl">&rarr;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Schedule Modal -->
+    <div class="fixed inset-0 bg-gray-900 bg-opacity-75 flex justify-center items-center hidden z-50"
+        id="scheduleModal">
+        <div class="bg-gray-800 p-8 rounded-lg w-[90vw] lg:w-[35vw]">
+            <div class="flex items-center justify-between">
+                <h2 class="text-xl font-semibold mb-4">Enter OTP</h2>
+                <button
+                    class="h-[1em] w-[2em] lg:h-[2em] flex justify-center items-center text-center lg:w-[2em] rounded-xl text-red-600 text-3xl"
+                    id="cancelScheduleModalButton">&times;</button>
+            </div>
+            <p class="text-gray-300 mb-4">A One-Time Password (OTP) has been sent to your email/phone.</p>
+            <div id="otpInputs" class="flex flex-col mb-4 gap-2">
+                <input type="text"
+                    class="otp-input border bg-gray-700 border-white w-[70vw] lg:w-[30vw] h-[3em] text-green-500 text-center rounded"
+                    placeholder="Enter OTP">
+                <input type="textarea"
+                    class="otp-input border bg-gray-700 border-white w-[70vw] lg:w-[30vw] h-[6em] lg:h-[8em] text-center rounded text-green-500"
+                    placeholder="Additional Comments">
+                <input type="date"
+                    class="otp-input border bg-gray-700 border-white w-[70vw] lg:w-[30vw] h-[3em] px-4 rounded text-green-500">
+            </div>
+            <button class="h-[3em] w-[30vw] bg-green-400 rounded mb-2" id="approveButton">Schedule</button>
+        </div>
+    </div>
+
+    <!-- Cancel Modal -->
+    <div class="fixed inset-0 bg-gray-900 bg-opacity-75 flex justify-center items-center hidden z-50" id="cancelModal">
+        <div class="bg-gray-800 p-8 rounded-lg w-[90vw] lg:w-[35vw]">
+            <div class="flex items-center justify-between">
+                <h2 class="text-xl font-semibold mb-4">Enter OTP</h2>
+                <button
+                    class="h-[1em] w-[2em] lg:h-[2em] flex justify-center items-center text-center lg:w-[2em] rounded-xl text-red-600 text-3xl"
+                    id="cancelCancelModalButton">&times;</button>
+            </div>
+            <p class="text-gray-300 mb-4">Reason for cancelling Schedule</p>
+            <div id="otpInputs1" class="flex flex-col mb-4 gap-2">
+                <input type="text"
+                    class="otp-input border bg-gray-700 border-white w-[70vw] lg:w-[30vw] h-[7em] text-green-500 lg:text-2xl text-center rounded"
+                    placeholder="Reason for Candelling Schedule">
+                <button class="h-[3em] w-[30vw] bg-red-400 rounded" id="cancelButton">Cancel Schedule</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const adminButton = document.getElementById('adminButton');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+
+            adminButton.addEventListener('click', () => {
+                // Toggle visibility
+                dropdownMenu.classList.toggle('hidden');
+            });
+
+            // Optional: Hide dropdown if clicked outside
+            document.addEventListener('click', (e) => {
+                if (!adminButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                    dropdownMenu.classList.add('hidden');
+                }
+            });
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            // Attach event listener to the logout link
+            const logoutLink = document.getElementById('logoutLink');
+            if (logoutLink) {
+                logoutLink.addEventListener('click', function (e) {
+                    e.preventDefault(); // Prevent default link behavior
+
+                    // Clear user session/data
+                    clearUserSession();
+
+                    // Redirect to login page
+                    window.location.href = "./adminlogin.html"; // Adjust the path to your login page
+                });
+            }
+        });
+
+        // Function to clear user session/data
+        function clearUserSession() {
+            // Remove items from session storage
+            sessionStorage.clear();
+
+            // Remove cookies (optional)
+            document.cookie.split(";").forEach(cookie => {
+                const [name] = cookie.split("=");
+                document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+            });
+        }
+
+
+        const tableData = [
+            { id: 1, patient: 'Alfreds Futterkiste', date: '2024-08-15', status: 'Pending', doctor: 'Dr. Smith' },
+            { id: 2, patient: 'Centro comercial Moctezuma', date: '2024-08-16', status: 'Pending', doctor: 'Dr. Johnson' },
+            { id: 3, patient: 'Ernst Handel', date: '2024-08-17', status: 'Pending', doctor: 'Dr. Lee' },
+            { id: 4, patient: 'Island Trading', date: '2024-08-18', status: 'Pending', doctor: 'Dr. Brown' },
+            { id: 5, patient: 'Laughing Bacchus Winecellars', date: '2024-08-19', status: 'Pending', doctor: 'Dr. Taylor' },
+            { id: 6, patient: 'Magazzini Alimentari Riuniti', date: '2024-08-20', status: 'Pending', doctor: 'Dr. Clark' },
+            // More data...
+        ];
+
+        // Function to update the stats section
+        function updateStats() {
+            const scheduledCount = tableData.filter(item => item.status === 'Scheduled').length;
+            const pendingCount = tableData.filter(item => item.status === 'Pending').length;
+            const cancelledCount = tableData.filter(item => item.status === 'Cancelled').length;
+
+            // Update HTML elements with calculated values
+            document.getElementById('scheduledCount').textContent = scheduledCount;
+            document.getElementById('pendingCount').textContent = pendingCount;
+            document.getElementById('cancelledCount').textContent = cancelledCount;
+        }
+
+        // Call this function after rendering the table or when data updates
+        updateStats();
+
+        const rowsPerPage = 5;
+        let currentPage = 1;
+
+        // Render table function
+        function renderTable(page) {
+            const start = (page - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+            const paginatedData = tableData.slice(start, end);
+
+            const tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = ''; // Clear previous rows
+
+            paginatedData.forEach(data => {
+                const row = `<tr data-id="${data.id}">
+            <td>${data.patient}</td>
+            <td>${data.date}</td>
+            <td class="status"><h6 class='py-1 bg-gray-400 text-black text-center rounded-2xl'>${data.status}</h6></td>
+            <td>${data.doctor}</td>
+            <td class="gap-4">
+                <button class='text-green-500' type='button' data-action="approve">Schedule</button>
+                <button class="text-red-600" type='button' data-action="cancel">Cancel</button>
+            </td>
+        </tr>`;
+                tableBody.insertAdjacentHTML('beforeend', row);
+            });
+
+            updatePaginationButtons();
+        }
+
+        // Update pagination buttons
+        function updatePaginationButtons() {
+            document.getElementById('prevPage').disabled = currentPage === 1;
+            document.getElementById('nextPage').disabled = currentPage === Math.ceil(tableData.length / rowsPerPage);
+        }
+
+        // Show modal function
+        function showModal(modalId, action, id) {
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('hidden');
+            const confirmButton = modal.querySelector(`#${action}Button`);
+            confirmButton.onclick = () => handleAction(action, id, modal);
+        }
+
+        // Hide modal function
+        function hideModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.add('hidden');
+        }
+
+        // Handle scheduling or canceling action
+        function handleAction(action, id, modal) {
+            const otpInput = modal.querySelector('.otp-input');
+            const otp = otpInput ? otpInput.value : '';
+
+            if (action === 'approve') {
+                const row = document.querySelector(`tr[data-id="${id}"]`);
+                const statusCell = row.querySelector('.status');
+                statusCell.textContent = 'Scheduled';
+            } else if (action === 'cancel') {
+                const row = document.querySelector(`tr[data-id="${id}"]`);
+                const statusCell = row.querySelector('.status');
+                statusCell.textContent = 'Cancelled';
+            }
+
+            hideModal(`${action}Modal`);
+            // Optionally, update tableData array or server
+        }
+
+        // Event listeners
+        document.getElementById('prevPage').addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                renderTable(currentPage);
+            }
+        });
+
+        document.getElementById('nextPage').addEventListener('click', () => {
+            if (currentPage < Math.ceil(tableData.length / rowsPerPage)) {
+                currentPage++;
+                renderTable(currentPage);
+            }
+        });
+
+        document.getElementById('tableBody').addEventListener('click', (e) => {
+            const target = e.target;
+            if (target.tagName === 'BUTTON') {
+                const row = target.closest('tr');
+                const id = row.getAttribute('data-id');
+                const action = target.getAttribute('data-action');
+
+                if (action === 'approve') {
+                    showModal('scheduleModal', 'approve', id);
+                } else if (action === 'cancel') {
+                    showModal('cancelModal', 'cancel', id);
+                }
+            }
+        });
+
+        // Close modal buttons
+        document.getElementById('cancelScheduleModalButton').addEventListener('click', () => hideModal('scheduleModal'));
+        document.getElementById('cancelCancelModalButton').addEventListener('click', () => hideModal('cancelModal'));
+
+        // Initial render
+        renderTable(currentPage);
+
+    </script>
+</body>
+
+</html>

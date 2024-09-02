@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./output.css">
+  <script src='./script/registration.js'></script>
+  <script src="https://kit.fontawesome.com/c588e117e7.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <title>CAREPLUS+ || Your no1 healthcare agent</title>
+</head>
+
+<body class="w-[100vw] overflow-x-hidden">
+  <div class="w-[100vw] overflow-x-hidden bg-gray-900 text-white flex flex-col lg:flex-row">
+    <div class='flex flex-col justify-center items-center w-[100vw] lg:w-[70vw] py-8'>
+      <div class="mt-8">
+        <img src="../../images/Logo.svg" alt="Careplus Logo">
+      </div>
+      <form class="flex flex-col justify-center items-center">
+        <div class="w-[60vw] py-16">
+          <h1 class="text-2xl lg:text-3xl font-bold">Personal Information</h1>
+        </div>
+        <div class="text-white gap-2 flex flex-col py-2">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" placeholder="Full Name"
+            class="w-[80vw] lg:w-[60vw] bg-gray-800 border h-[3em] rounded-xl pl-8" />
+        </div>
+        <div class="flex gap-2 flex-col lg:flex-row">
+          <div class="text-white gap-2 py-2 flex flex-col">
+            <label for="phoneNumber">Phone Number</label>
+            <input type="tel" id="phoneNumber" placeholder="Phone Number"
+              class="w-[80vw] lg:w-[30vw] h-[3em] rounded-xl pl-8 bg-gray-800 border" />
+          </div>
+          <div class="text-white gap-2 py-2 flex flex-col">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Email Address"
+              class="w-[80vw] lg:w-[30vw] h-[3em] rounded-xl pl-8 bg-gray-800 border" />
+          </div>
+        </div>
+        <div class="flex gap-2 flex-col lg:flex-row">
+          <div class="text-white gap-2 py-2 flex flex-col">
+            <label for="birthDate">Date of Birth</label>
+            <input type="date" id="birthDate" class="w-[80vw] lg:w-[30vw] h-[3em] rounded-xl px-4 bg-gray-800 border" />
+          </div>
+          <div class="text-white gap-2 py-2 flex flex-col">
+            <label>Sex</label>
+            <div class="flex gap-4">
+              <label
+                class="h-[3em] flex gap-2 justify-center items-center w-[25vw] lg:w-[9vw] rounded-xl bg-gray-800 border border-dashed">
+                <input type="radio" name="sex" value="male"> Male
+              </label>
+              <label
+                class="h-[3em] flex gap-2 justify-center items-center w-[25vw] lg:w-[9vw] rounded-xl bg-gray-800 border border-dashed">
+                <input type="radio" name="sex" value="female"> Female
+              </label>
+              <label
+                class="h-[3em] flex gap-2 justify-center items-center w-[25vw] lg:w-[9vw] rounded-xl bg-gray-800 border border-dashed">
+                <input type="radio" name="sex" value="other"> Other
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="flex gap-2 flex-col lg:flex-row">
+          <div class="text-white gap-2 py-2 flex flex-col">
+            <label for="address">Address</label>
+            <input type="text" id="address" placeholder="Address"
+              class="w-[80vw] lg:w-[30vw] h-[3em] rounded-xl pl-8 bg-gray-800 border" />
+          </div>
+          <div class="text-white gap-2 flex flex-col py-2">
+            <label for="occupation">Occupation</label>
+            <select id="occupation" class="w-[80vw] lg:w-[30vw] bg-gray-800 border h-[3em] rounded-xl px-8">
+              <option value="doctor">Doctor</option>
+              <option value="nurse">Nurse</option>
+              <option value="teacher">Teacher</option>
+              <option value="engineer">Engineer</option>
+              <option value="software-developer">Software Developer</option>
+              <option value="accountant">Accountant</option>
+              <option value="lawyer">Lawyer</option>
+              <option value="architect">Architect</option>
+              <option value="pilot">Pilot</option>
+              <option value="dentist">Dentist</option>
+              <option value="pharmacist">Pharmacist</option>
+              <option value="chef">Chef</option>
+              <option value="mechanic">Mechanic</option>
+              <option value="electrician">Electrician</option>
+              <option value="plumber">Plumber</option>
+              <option value="carpenter">Carpenter</option>
+              <option value="artist">Artist</option>
+              <option value="musician">Musician</option>
+              <option value="journalist">Journalist</option>
+              <option value="writer">Writer</option>
+              <option value="photographer">Photographer</option>
+              <option value="graphic-designer">Graphic Designer</option>
+              <option value="web-designer">Web Designer</option>
+              <option value="entrepreneur">Entrepreneur</option>
+              <option value="scientist">Scientist</option>
+              <option value="biologist">Biologist</option>
+              <option value="chemist">Chemist</option>
+              <option value="physicist">Physicist</option>
+              <option value="researcher">Researcher</option>
+              <option value="police-officer">Police Officer</option>
+              <option value="firefighter">Firefighter</option>
+              <option value="paramedic">Paramedic</option>
+              <option value="bus-driver">Bus Driver</option>
+              <option value="taxi-driver">Taxi Driver</option>
+              <option value="truck-driver">Truck Driver</option>
+              <option value="salesperson">Salesperson</option>
+              <option value="real-estate-agent">Real Estate Agent</option>
+              <option value="personal-trainer">Personal Trainer</option>
+              <option value="social-worker">Social Worker</option>
+              <option value="psychologist">Psychologist</option>
+              <option value="therapist">Therapist</option>
+              <option value="financial-advisor">Financial Advisor</option>
+              <option value="banker">Banker</option>
+            </select>
+          </div>
+
+        </div>
+
+        <div class="flex gap-2 flex-col lg:flex-row">
+          <div class="text-white gap-2 py-2 flex flex-col">
+            <label for="emergencyContact">Emergency Contact Name</label>
+            <input type="text" id="emergencyContact" placeholder="Emergency Contact Name"
+              class="w-[80vw] lg:w-[30vw] h-[3em] rounded-xl pl-8 bg-gray-800 border" />
+          </div>
+          <div class="text-white gap-2 py-2 flex flex-col">
+            <label for="emergencyPhone">Emergency Phone Number</label>
+            <input type="tel" id="emergencyPhone" placeholder="Emergency Phone Number"
+              class="w-[80vw] lg:w-[30vw] h-[3em] rounded-xl pl-8 bg-gray-800 border" />
+          </div>
+        </div>
+        <div class="w-[60vw] py-16">
+          <h1 class="text-3xl font-bold">Medical Information</h1>
+        </div>
+        <div class="text-white gap-2 flex flex-col py-2">
+          <label for="doctor">Primary Care Physician</label>
+          <select id="doctor" class="w-[80vw] lg:w-[60vw] bg-gray-800 border h-[3em] rounded-xl px-8">
+            <option value="dr_smith">Dr. John Smith</option>
+            <option value="dr_jones">Dr. Emily Jones</option>
+            <option value="dr_clark">Dr. Michael Clark</option>
+            <option value="dr_taylor">Dr. Sarah Taylor</option>
+            <option value="dr_white">Dr. David White</option>
+            <option value="dr_davis">Dr. Elizabeth Davis</option>
+            <option value="dr_moore">Dr. James Moore</option>
+            <option value="dr_martin">Dr. Mary Martin</option>
+            <option value="dr_jackson">Dr. Christopher Jackson</option>
+            <option value="dr_thompson">Dr. Patricia Thompson</option>
+            <option value="dr_harris">Dr. Robert Harris</option>
+            <option value="dr_anderson">Dr. Linda Anderson</option>
+            <option value="dr_lee">Dr. Barbara Lee</option>
+            <option value="dr_king">Dr. William King</option>
+            <option value="dr_wright">Dr. Karen Wright</option>
+            <option value="dr_lopez">Dr. Richard Lopez</option>
+            <option value="dr_hall">Dr. Susan Hall</option>
+            <option value="dr_allen">Dr. Charles Allen</option>
+            <option value="dr_young">Dr. Nancy Young</option>
+            <option value="dr_scott">Dr. Thomas Scott</option>
+          </select>
+
+        </div>
+        <div class="flex gap-2 flex-col lg:flex-row">
+          <div class="text-white gap-2 py-2 flex flex-col">
+            <label for="insuranceprovider">Insurance provider</label>
+            <input type="text" id="insuranceprovider" placeholder="Doctor's Phone Number"
+              class="w-[80vw] lg:w-[30vw] h-[3em] rounded-xl pl-8 bg-gray-800 border" />
+          </div>
+          <div class="text-white gap-2 py-2 flex flex-col">
+            <label for="insurancepolicy">Insurance policy number</label>
+            <input type="text" id="insurancepolicy" placeholder="Doctor's Email Address"
+              class="w-[80vw] lg:w-[30vw] h-[3em] rounded-xl pl-8 bg-gray-800 border" />
+          </div>
+        </div>
+        <div class="flex gap-2 flex-col lg:flex-row">
+          <div class="text-white gap-2 py-2 flex flex-col">
+            <label for="allergies">Allergies (if any)</label>
+            <textarea type="text" id="allergies" placeholder="Allergies"
+              class="w-[80vw] lg:w-[30vw] h-[8em] rounded-xl pl-8 bg-gray-800 border pt-4"></textarea>
+          </div>
+          <div class="text-white gap-2 py-2 flex flex-col">
+            <label for="currentmedications">Current medications</label>
+            <textarea type="text" id="currentmedications" placeholder="currentmedications"
+              class="w-[80vw] lg:w-[30vw] h-[8em] rounded-xl pl-8 bg-gray-800 border pt-4"></textarea>
+          </div>
+        </div>
+        <div class="flex gap-2 flex-col lg:flex-row">
+          <div class="text-white gap-2 py-2 flex flex-col">
+            <label for="medicalhistory">Family medical history (if relevant)</label>
+            <textarea type="text" id="medicalhistory" placeholder="Doctor's Phone Number"
+              class="w-[80vw] lg:w-[30vw] h-[8em] rounded-xl pl-8 bg-gray-800 border pt-4"></textarea>
+          </div>
+          <div class="text-white gap-2 py-2 flex flex-col">
+            <label for="pastmedicalhistory">Past medical history</label>
+            <textarea type="text" id="pastmedicalhistory" placeholder="Doctor's Email Address"
+              class="w-[80vw] lg:w-[30vw] h-[8em] rounded-xl pl-8 bg-gray-800 border pt-4"></textarea>
+          </div>
+        </div>
+        <div class="w-[60vw] py-16">
+          <h1 class="text-2xl lg:text-3xl font-bold">identification and verification</h1>
+        </div>
+        <div class="text-white gap-2 flex flex-col py-2">
+          <label for="additionalInfo">Identification Type</label>
+          <select id="identification" class="w-[80vw] lg:w-[60vw] bg-gray-800 border h-[3em] rounded-xl px-8">
+            <option value="passport">Passport</option>
+            <option value="drivers_license">Driver's License</option>
+            <option value="national_id">National ID</option>
+            <option value="birth_certificate">Birth Certificate</option>
+            <option value="voter_card">Voter's Card</option>
+          </select>
+        </div>
+
+        <div class="text-white gap-2 flex flex-col py-2">
+          <label for="additionalInfo">identifation number</label>
+          <input id="additionalInfo" placeholder="Enter any additional information"
+            class="w-[80vw] lg:w-[60vw] h-[3em] rounded-xl pl-8 bg-gray-800 border">
+        </div>
+        <div class="text-white gap-2 flex flex-col py-2">
+          <label for="profileUpload">Please upload a valid image file.</label>
+          <div class="relative w-[80vw] lg:w-[60vw]">
+            <input type="file" id="profileUpload" accept=".jpg,.jpeg,.png"
+              class="w-full bg-gray-800 border h-[8em] flex justify-center items-center rounded-xl text-center text-sm text-gray-400 file:hidden" />
+            <i class="fas fa-upload absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+            <span class="absolute top-1/2 transform -translate-y-1/2 translate-x-[20vw] left-16 text-gray-400">Upload
+              your profile</span>
+          </div>
+          <p id="uploadError" class="text-red-500 hidden">Please upload a valid image file (JPG, PNG).</p>
+        </div>
+        <div class="w-[60vw] py-16">
+          <h1 class="text-3xl font-bold">Terms and Conditions</h1>
+        </div>
+        <div class="w-[80vw] lg:w-[60vw] py-4 flex gap-4 break-all">
+          <input type="checkbox" id="terms1">
+          <label for="terms1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</label>
+        </div>
+        <div class="w-[80vw] lg:w-[60vw] py-4 flex gap-4 break-all">
+          <input type="checkbox" id="terms2">
+          <label for="terms2">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</label>
+        </div>
+        <div class="w-[80vw] lg:w-[60vw] py-4 flex gap-4 break-all">
+          <input type="checkbox" id="terms3">
+          <label for="terms3">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo consequat.</label>
+        </div>
+        <div class="flex flex-col justify-center items-center gap-4">
+          <button type="submit"
+            class="w-[80vw] lg:w-[60vw] py-3 bg-green-600 rounded-lg font-bold text-lg hover:bg-green-800 transition-all duration-300">
+            Submit
+          </button>
+          <h3 class="flex items-center gap-4 py-4"> If you have an account<a href='../index.html'
+              class="text-blue-500 py-2 px-4 rounded-2xl bg-white">Login</a></h3>
+        </div>
+      </form>
+      <div class="pt-8">
+        <p class="text-gray-400">&copy;carepulse copyright</p>
+      </div>
+    </div>
+    <div class="w-[100vw] lg:w-[30vw]">
+      <img src="../../../images/appointment.png" class="w-[30vw] hidden lg:flex" alt="Careplus Logo White">
+    </div>
+  </div>
+
+</body>
+
+</html>

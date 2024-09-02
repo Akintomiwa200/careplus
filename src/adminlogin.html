@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./output.css">
+    <script src="https://kit.fontawesome.com/c588e117e7.js" crossorigin="anonymous"></script>
+    <script src="index.js" defer></script>
+    <title>CAREPLUS+ || Your no1 healthcare agent</title>
+</head>
+
+<body class="w-[100vw] h-[100vh] text-white overflow-hidden bg-gray-950">
+    <div class="flex flex-col lg:flex-row h-[100vh] justify-center items-center bg-gray-900">
+        <div class="lg:w-[50vw] w-[100vw] lg:h-[80vh] h-[90vh] flex flex-col justify-between items-center">
+            <div>
+                <img src="../../../images/Logo.svg" alt="">
+            </div>
+            <div class="lg:h-50vh h-70vh ">
+                <div class="lg:mb-16 text-gray-300">
+                    <h2>HI THERE, ...</h2>
+                    <p>Get started with Appointment</p>
+                </div>
+                <form id="mainForm" action="" method="get" class="gap-2 flex flex-col">
+
+                    <div class="flex flex-col gap-2 my-2">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" name="fullName" id="fullName"
+                            class="border bg-gray-800 border-white w-90vw lg:w-[30vw] h-[3em] rounded-xl pl-8"
+                            placeholder="Enter your full name">
+                    </div>
+                    <div class="flex flex-col gap-2 my-2">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email"
+                            class="bg-gray-800 border border-white w-90vw lg:w-[30vw] h-[3em] rounded-xl pl-8"
+                            placeholder="Enter your email">
+                    </div>
+
+                    <div class="flex flex-col gap-2 my-2">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" name="phone" id="phone"
+                            class="border border-white bg-gray-800 w-90vw lg:w-[30vw] h-[3em] rounded-xl pl-8"
+                            placeholder="Enter your phone number">
+                    </div>
+                    <button class="h-[3em] w-[80vw] lg:w-[30vw] bg-green-400 rounded-xl my-4" id="getStartedButton"
+                        type='button'> Get Started</button>
+                </form>
+            </div>
+            <div>
+                <p class="text-gray-400">&copy;carepulse copyright</p>
+            </div>
+        </div>
+        <div class="hidden lg:flex w-[50vw] h-[100vh] flex-col justify-center items-center">
+            <img src="../../../images/Illustration.png" alt="">
+        </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div id="adminLogin" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex justify-center items-center hidden z-50">
+        <div class="bg-gray-800 p-8 rounded-lg w-[80vw] lg:w-[35vw]">
+            <div class="flex items-center justify-between">
+                <h2 class="text-xl font-semibold mb-4">Enter OTP</h2>
+                <button
+                    class="h-[1em] w-[2em] lg:h-[2em] flex justify-center items-center text-center lg:w-[2em] rounded-xl text-red-600 text-3xl"
+                    id="cancelCancelModalButton">&times;</button>
+            </div>
+            <p class="text-gray-300 mb-4">Enter your admin PIN to access the dashboard.</p>
+            <div id="pinInputs" class="flex justify-between mb-4 gap-2">
+                <input type="text" maxlength="1"
+                    class="pin-input border bg-gray-700 border-white w-[2em] lg:w-[3em] h-[2em] lg:h-[3em] text-green-500 lg:text-2xl text-center rounded-xl">
+                <input type="text" maxlength="1"
+                    class="pin-input border bg-gray-700 border-white w-[2em] lg:w-[3em] h-[2em] lg:h-[3em] text-center rounded-xl text-green-500 lg:text-2xl">
+                <input type="text" maxlength="1"
+                    class="pin-input border bg-gray-700 border-white w-[2em] lg:w-[3em] h-[2em] lg:h-[3em] text-center rounded-xl text-green-500 lg:text-2xl">
+                <input type="text" maxlength="1"
+                    class="pin-input border bg-gray-700 border-white w-[2em] lg:w-[3em] h-[2em] lg:h-[3em] text-center rounded-xl text-green-500 lg:text-2xl">
+                <input type="text" maxlength="1"
+                    class="pin-input border bg-gray-700 border-white w-[2em] lg:w-[3em] h-[2em] lg:h-[3em] text-center rounded-xl text-green-500 lg:text-2xl">
+                <input type="text" maxlength="1"
+                    class="pin-input border bg-gray-700 border-white w-[2em] lg:w-[3em] h-[2em] lg:h-[3em] text-center rounded-xl text-green-500 lg:text-2xl">
+            </div>
+            <button class="h-[3em] w-full bg-green-400 rounded-xl mb-2" id="verifyPinButton">Login</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('verifyPinButton').addEventListener('click', async function () {
+            const pinValue = Array.from(pinInputs).map(input => input.value).join('');
+
+            if (pinValue.length === 6 && /^[0-9]{6}$/.test(pinValue)) {
+                try {
+                    const response = await fetch('http://localhost:5000/api/admin/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            email: 'admin@example.com',
+                            password: pinValue,  // This should be replaced with a hashed password in the actual implementation
+                        }),
+                    });
+
+                    const data = await response.json();
+
+                    if (data.token) {
+                        alert('PIN verified! Proceeding...');
+                        window.location.href = "./admin/dashboard.html";
+                    } else {
+                        alert(data.message);
+                    }
+                } catch (error) {
+                    alert('Server error. Please try again later.');
+                }
+            } else {
+                alert('Please enter a valid 6-digit PIN.');
+            }
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-900 text-white">
+    <header class="w-full h-[8vh] bg-black text-white px-4 lg:px-16 flex justify-between rounded-full items-center">
+        <div>
+            <img class="w-16 lg:w-auto" src='../../images/logo.svg' alt="Logo">
+        </div>
+        <span class="flex items-center gap-2 lg:gap-4 relative">
+            <img src="" class="h-[2em] w-[2em] border rounded-full border-white" alt="Admin">
+            <h5 class="text-xs lg:text-auto cursor-pointer" id="adminButton">Admin</h5>
+            <div id="dropdownMenu"
+                class="absolute right-0 mt-2 w-48 bg-gray-800 text-white rounded-lg shadow-lg hidden">
+                <a href="profile.html" class="block px-4 py-2 hover:bg-gray-700">My Profile</a>
+                <a href="settings.html" class="block px-4 py-2 hover:bg-gray-700">Settings</a>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-700" id="logoutButton">Logout</a>
+            </div>
+        </span>
+    </header>
+
+    <main class="p-8">
+        <h1 class="text-2xl mb-4">My Profile</h1>
+        <!-- Profile content here -->
+    </main>
+
+    <script src="scripts.js"></script>
+</body>
+
+</html>

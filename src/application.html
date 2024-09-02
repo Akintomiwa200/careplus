@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./output.css">
+    <script src="https://kit.fontawesome.com/c588e117e7.js" crossorigin="anonymous"></script>
+    <title>CAREPLUS+ || Your no1 healthcare agent</title>
+</head>
+
+<body class="w-[100vw] overflow-hidden">
+    <div class="w-[100vw] h-[100vh] overflow-hidden bg-gray-900 text-white flex flex-col lg:flex-row ">
+        <div class='flex flex-col justify-center items-center w-[100vw] lg:w-[70vw]'>
+            <div class="mt-8">
+                <img src="../../images/Logo.svg" alt="">
+            </div>
+
+            <div>
+                Hey there 👋
+                <p>Request a new appointment in 10 seconds.</p>
+            </div>
+
+            <form class="rounded-lg p-6" id="appointmentForm">
+
+                <div class="text-white gap-2 flex flex-col py-2">
+                    <label for="doctor" class="block text-white font-bold mb-2">Doctor</label>
+                    <select id="doctor" class="w-[80vw] lg:w-[60vw] bg-gray-800 border h-[3em] rounded-xl px-8">
+                        <option value="dr_smith">Dr. John Smith</option>
+                        <option value="dr_jones">Dr. Emily Jones</option>
+                        <option value="dr_clark">Dr. Michael Clark</option>
+                        <option value="dr_taylor">Dr. Sarah Taylor</option>
+                        <option value="dr_white">Dr. David White</option>
+                        <option value="dr_davis">Dr. Elizabeth Davis</option>
+                        <option value="dr_moore">Dr. James Moore</option>
+                        <option value="dr_martin">Dr. Mary Martin</option>
+                        <option value="dr_jackson">Dr. Christopher Jackson</option>
+                        <option value="dr_thompson">Dr. Patricia Thompson</option>
+                        <option value="dr_harris">Dr. Robert Harris</option>
+                        <option value="dr_anderson">Dr. Linda Anderson</option>
+                        <option value="dr_lee">Dr. Barbara Lee</option>
+                        <option value="dr_king">Dr. William King</option>
+                        <option value="dr_wright">Dr. Karen Wright</option>
+                        <option value="dr_lopez">Dr. Richard Lopez</option>
+                        <option value="dr_hall">Dr. Susan Hall</option>
+                        <option value="dr_allen">Dr. Charles Allen</option>
+                        <option value="dr_young">Dr. Nancy Young</option>
+                        <option value="dr_scott">Dr. Thomas Scott</option>
+                    </select>
+                </div>
+
+                <div class="flex flex-col lg:flex-row gap-8">
+                    <div class="mb-4">
+                        <label for="reason" class="block text-white font-bold mb-2">Reason for Appointment</label>
+                        <textarea id="reason" name="reason"
+                            class="border bg-gray-800 border-white w-90vw lg:w-[29vw] h-[8em] rounded-xl pl-8"></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <label for="comments" class="block text-white font-bold mb-2">Additional Comments</label>
+                        <textarea id="comments" name="comments"
+                            class="border bg-gray-800 border-white w-90vw lg:w-[29vw] h-[8em] rounded-xl pl-8"></textarea>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="date" class="block text-white font-bold mb-2">Expected Appointment Date</label>
+                    <input type="date" id="date" name="date"
+                        class="border bg-gray-800 border-white w-90vw lg:w-[60vw] h-[3em] rounded-xl px-4">
+                </div>
+
+                <button type="submit" class="h-[3em] w-[80vw] lg:w-[60vw] bg-green-400 rounded-xl my-4">Submit and
+                    Continue</button>
+            </form>
+        </div>
+        <div class="w-[30vw]">
+            <img class="w-[30vw]" src="../../../images/appointment.png">
+        </div>
+    </div>
+
+    <script>
+        // Dropdown toggle functionality
+        const doctorInput = document.getElementById('doctor');
+        const doctorDropdownToggle = document.getElementById('doctorDropdownToggle');
+        const doctorDropdown = document.getElementById('doctorDropdown');
+
+        doctorDropdownToggle.addEventListener('click', () => {
+            doctorDropdown.classList.toggle('hidden');
+        });
+
+        // Selecting a doctor from the dropdown
+        const dropdownItems = doctorDropdown.querySelectorAll('li');
+        dropdownItems.forEach(item => {
+            item.addEventListener('click', () => {
+                doctorInput.value = item.textContent;
+                doctorDropdown.classList.add('hidden');
+            });
+        });
+
+        // Form validation and submission
+        const appointmentForm = document.getElementById('appointmentForm');
+        appointmentForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Validate form fields
+            const doctor = doctorInput.value.trim();
+            const reason = document.getElementById('reason').value.trim();
+            const date = document.getElementById('date').value.trim();
+
+            if (doctor === '' || reason === '' || date === '') {
+                alert('Please fill in all required fields.');
+            } else {
+                // Store form data in localStorage
+                localStorage.setItem('doctor', doctor);
+                localStorage.setItem('reason', reason);
+                localStorage.setItem('date', date);
+
+                // Redirect to the approve page
+                window.location.href = "./approve.html";
+            }
+        });
+
+    </script>
+</body>
+
+</html>
